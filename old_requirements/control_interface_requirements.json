@@ -1,0 +1,86 @@
+{
+  "expand": "schema,names",
+  "startAt": 0,
+  "maxResults": 3,
+  "total": 3,
+  "issues": [
+    {
+      "id": "99",
+      "key": "swdd~agent-control-interface-creates-two-pipes-per-workload~1",
+      "fields": {
+        "summary": "Control interface FIFO creation",
+        "issuetype": {
+          "id": "100",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The control interface shall create named pipes (FIFOs) for bidirectional workload communication. Each workload gets dedicated input and output pipes for secure inter-process communication with the agent.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "100",
+      "key": "swdd~agent-control-interface-pipes-path-naming~2",
+      "fields": {
+        "summary": "Control interface path convention",
+        "issuetype": {
+          "id": "100",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "Control interface pipes shall be created at /run/ankaios/control_interface/<workload_name>/ with standardized naming. The path structure ensures proper isolation and predictable locations for workload communication channels.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "101",
+      "key": "swdd~agent-control-interface-authorization~1",
+      "fields": {
+        "summary": "Control interface authorization",
+        "issuetype": {
+          "id": "100",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The control interface shall enforce access control rules before forwarding requests to the server. Authorization ensures workloads can only perform operations allowed by their configured access policies.",
+        "verifiableByCodeOnly": true
+      }
+    }
+  ]
+}

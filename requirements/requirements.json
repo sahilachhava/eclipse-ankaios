@@ -1,16 +1,16 @@
 {
   "expand": "schema,names",
   "startAt": 0,
-  "maxResults": 5,
-  "total": 5,
+  "maxResults": 103,
+  "total": 103,
   "issues": [
     {
-      "id": "20001",
-      "key": "swddserver-loads-config-file1",
+      "id": "1",
+      "key": "swdd~server-loads-config-file~1",
       "fields": {
         "summary": "Server loads config file",
         "issuetype": {
-          "id": "100",
+          "id": "1",
           "description": "Software design requirement",
           "name": "Requirement"
         },
@@ -26,17 +26,69 @@
           "displayName": "System",
           "accountId": "system"
         },
-        "description": "The Ankaios server shall accept configuration files read at startup that specify the general startup configuration of the server with a lower precedence than environment variables and command line arguments.",
+        "description": "The server shall load configuration from files at startup with proper precedence (file < environment variables < CLI arguments). This allows flexible configuration management across different deployment scenarios.",
         "verifiableByCodeOnly": true
       }
     },
     {
-      "id": "20002",
-      "key": "swddserver-starts-without-startup-config1",
+      "id": "2",
+      "key": "swdd~server-state-in-memory~1",
+      "fields": {
+        "summary": "Server holds Current State in memory",
+        "issuetype": {
+          "id": "2",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The server shall maintain the complete current state of all workloads and agents in memory for fast access and state management. This enables quick state queries and efficient state distribution.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "3",
+      "key": "swdd~server-loads-startup-state-file~3",
+      "fields": {
+        "summary": "Server loads Startup State from file",
+        "issuetype": {
+          "id": "3",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The server shall parse and load initial workload configurations from a YAML startup manifest file at launch. This provides a declarative way to define the initial cluster state.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "4",
+      "key": "swdd~server-starts-without-startup-config~1",
       "fields": {
         "summary": "Server starts without startup config",
         "issuetype": {
-          "id": "100",
+          "id": "4",
           "description": "Software design requirement",
           "name": "Requirement"
         },
@@ -52,17 +104,17 @@
           "displayName": "System",
           "accountId": "system"
         },
-        "description": "When the Ankaios server is started without a startup config, the server shall start with an empty current state.",
+        "description": "When no startup manifest is provided, the server shall initialize with an empty state and accept dynamic workload additions. This enables fully dynamic cluster configuration.",
         "verifiableByCodeOnly": true
       }
     },
     {
-      "id": "20003",
-      "key": "swddserver-supports-pem-file-paths-as-cli-arguments1",
+      "id": "5",
+      "key": "swdd~server-sets-state-of-new-workloads-to-pending~1",
       "fields": {
-        "summary": "Server supports PEM file paths as CLI arguments for mTLS",
+        "summary": "Server sets new workloads to pending state",
         "issuetype": {
-          "id": "100",
+          "id": "5",
           "description": "Software design requirement",
           "name": "Requirement"
         },
@@ -78,17 +130,17 @@
           "displayName": "System",
           "accountId": "system"
         },
-        "description": "The Ankaios server shall support CLI arguments (--ca_pem, --crt_pem, --key_pem), alternatively configurable via environment variables, that provide PEM file paths for mTLS.",
+        "description": "The server shall automatically set the initial execution state of newly added workloads to 'pending' until agents begin execution. This provides a clear starting point for workload lifecycle management.",
         "verifiableByCodeOnly": true
       }
     },
     {
-      "id": "20004",
-      "key": "swddserver-supports-cli-argument-for-insecure-communication1",
+      "id": "6",
+      "key": "swdd~server-fails-on-invalid-startup-state~1",
       "fields": {
-        "summary": "Server supports CLI argument for insecure communication",
+        "summary": "Server fails on invalid startup state",
         "issuetype": {
-          "id": "100",
+          "id": "6",
           "description": "Software design requirement",
           "name": "Requirement"
         },
@@ -104,16 +156,2434 @@
           "displayName": "System",
           "accountId": "system"
         },
-        "description": "The Ankaios server shall support the CLI argument --insecure (short alias -k), alternatively configurable via the environment variable ANKSERVER_INSECURE.",
+        "description": "The server shall validate startup configurations and fail to start if invalid workload specifications or cyclic dependencies are detected. This prevents invalid cluster states from being deployed.",
         "verifiableByCodeOnly": true
       }
     },
     {
-      "id": "20005",
-      "key": "swddserver-provides-update-desired-state-interface1",
+      "id": "7",
+      "key": "swdd~server-supports-pem-file-paths-as-cli-arguments~1",
+      "fields": {
+        "summary": "Server supports PEM file paths for mTLS",
+        "issuetype": {
+          "id": "7",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The server shall accept PEM certificate and key file paths via CLI arguments (--ca_pem, --crt_pem, --key_pem) for mutual TLS authentication. This enables secure communication in production environments.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "8",
+      "key": "swdd~server-supports-cli-argument-for-insecure-communication~1",
+      "fields": {
+        "summary": "Server supports insecure communication",
+        "issuetype": {
+          "id": "8",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The server shall support non-TLS communication when explicitly enabled via the --insecure flag for development/testing environments. This simplifies development and testing workflows.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "9",
+      "key": "swdd~server-sends-all-workloads-on-start~2",
+      "fields": {
+        "summary": "Server sends all workloads on start",
+        "issuetype": {
+          "id": "9",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "Upon startup, the server shall distribute all workload specifications to connected agents based on their agent field assignments. This ensures all agents receive their workload assignments immediately.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "10",
+      "key": "swdd~server-stores-newly-connected-agent~1",
+      "fields": {
+        "summary": "Server stores newly connected agents",
+        "issuetype": {
+          "id": "10",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The server shall register and maintain a list of all connected agents with their attributes and connection status. This enables proper workload distribution and agent monitoring.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "11",
+      "key": "swdd~server-forwards-workload-state~1",
+      "fields": {
+        "summary": "Server forwards workload states",
+        "issuetype": {
+          "id": "11",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The server shall distribute workload state changes received from agents to all other connected agents and CLI clients. This ensures cluster-wide state consistency.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "12",
+      "key": "swdd~server-provides-interface-get-complete-state~2",
+      "fields": {
+        "summary": "Server provides GetCompleteState interface",
+        "issuetype": {
+          "id": "12",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The server shall provide an API endpoint to retrieve the complete cluster state with support for field filtering via masks. This enables efficient state queries for monitoring and management.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "13",
+      "key": "swdd~server-provides-update-desired-state-interface~1",
       "fields": {
         "summary": "Server provides UpdateState interface",
         "issuetype": {
+          "id": "13",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The server shall provide an API to update the desired state with support for partial updates using update masks. This allows dynamic cluster reconfiguration without full state replacement.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "14",
+      "key": "swdd~server-detects-workload-changes~1",
+      "fields": {
+        "summary": "Server detects workload changes",
+        "issuetype": {
+          "id": "14",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The server shall detect and categorize workload modifications as new, deleted, or changed by comparing desired and current states. This enables proper orchestration of workload updates.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "15",
+      "key": "swdd~server-state-rejects-state-with-cyclic-dependencies~1",
+      "fields": {
+        "summary": "Server handles cycle detection",
+        "issuetype": {
+          "id": "15",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The server shall detect and reject states containing cyclic inter-workload dependencies to prevent deadlocks. This ensures workload dependencies can be resolved in a deterministic order.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "16",
+      "key": "swdd~server-set-workload-state-on-disconnect~1",
+      "fields": {
+        "summary": "Server handles agent disconnections",
+        "issuetype": {
+          "id": "16",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "When an agent disconnects, the server shall update all its workloads to 'agent disconnected' state and notify other agents. This provides visibility into cluster health and agent availability.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "17",
+      "key": "swdd~server-state-stores-delete-condition~1",
+      "fields": {
+        "summary": "Server manages delete graph",
+        "issuetype": {
+          "id": "17",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The server shall maintain a dependency graph for delete operations to ensure workloads are deleted in the correct order. This prevents dependency violations during workload removal.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "18",
+      "key": "swdd~server-handles-logs-request-message~1",
+      "fields": {
+        "summary": "Server handles log campaigns",
+        "issuetype": {
+          "id": "18",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The server shall manage log streaming sessions between agents and CLI clients, including request routing and session cleanup. This enables centralized log aggregation and monitoring.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "19",
+      "key": "swdd~server-delegate-template-render-to-external-library~1",
+      "fields": {
+        "summary": "Server delegates template rendering",
+        "issuetype": {
+          "id": "19",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The server shall use the Handlebars library to render templated workload configurations with configuration variables. This enables dynamic configuration management and reusable workload definitions.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "20",
+      "key": "swdd~agent-loads-config-file~1",
+      "fields": {
+        "summary": "Agent loads config file",
+        "issuetype": {
+          "id": "20",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall load configuration from files with support for environment variables and CLI argument overrides. This provides flexible configuration management for different deployment scenarios.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "21",
+      "key": "swdd~agent-naming-convention~1",
+      "fields": {
+        "summary": "Agent naming convention",
+        "issuetype": {
+          "id": "21",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "Agent names shall contain only alphanumeric characters, hyphens, and underscores to ensure compatibility across the system. This prevents naming conflicts and ensures consistent identification.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "22",
+      "key": "swdd~agent-sends-hello~1",
+      "fields": {
+        "summary": "Agent sends hello",
+        "issuetype": {
+          "id": "22",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "Upon connection, the agent shall send a hello message containing its name and attributes to register with the server. This establishes the agent's identity and capabilities in the cluster.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "23",
+      "key": "swdd~agent-prepares-dedicated-run-folder~1",
+      "fields": {
+        "summary": "Agent prepares dedicated run folder",
+        "issuetype": {
+          "id": "23",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall create and manage a dedicated directory structure under /run/ankaios for runtime files and control interfaces. This provides organized storage for agent-managed resources.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "24",
+      "key": "swdd~agent-supports-multiple-runtime-connectors~1",
+      "fields": {
+        "summary": "Agent supports multiple runtime connectors",
+        "issuetype": {
+          "id": "24",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall support pluggable runtime connectors to manage different container runtimes (Podman, containerd, podman-kube). This enables flexibility in choosing the appropriate runtime for different workloads.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "25",
+      "key": "swdd~agent-supports-podman~2",
+      "fields": {
+        "summary": "Agent supports Podman runtime",
+        "issuetype": {
+          "id": "25",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall manage container lifecycles using Podman runtime via CLI commands for OCI container execution. This provides rootless container support and Docker compatibility.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "26",
+      "key": "swdd~agent-supports-containerd~1",
+      "fields": {
+        "summary": "Agent supports containerd runtime",
+        "issuetype": {
+          "id": "26",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall support containerd runtime using nerdctl CLI for container management in Kubernetes-like environments. This enables integration with containerd-based container platforms.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "27",
+      "key": "swdd~agent-supports-podman-kube-runtime~1",
+      "fields": {
+        "summary": "Agent supports podman-kube runtime",
+        "issuetype": {
+          "id": "27",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall execute Kubernetes pod specifications using podman-kube play for multi-container workloads. This enables deployment of complex applications defined in Kubernetes manifests.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "28",
+      "key": "swdd~agent-handles-update-workload-requests~1",
+      "fields": {
+        "summary": "Agent handles UpdateWorkload requests",
+        "issuetype": {
+          "id": "28",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall process workload update messages from the server and transform them into appropriate runtime operations. This enables dynamic workload management based on server commands.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "29",
+      "key": "swdd~agent-transforms-update-workload-message-to-workload-operations~1",
+      "fields": {
+        "summary": "Agent transforms messages to operations",
+        "issuetype": {
+          "id": "29",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall convert server messages into concrete operations: create, update, delete, or update-delete-only for workloads. This provides a clear execution model for workload lifecycle management.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "30",
+      "key": "swdd~agent-executes-create-workload-operation~1",
+      "fields": {
+        "summary": "Agent executes workload operations",
+        "issuetype": {
+          "id": "30",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall execute create, update, and delete operations on workloads using the appropriate runtime connector. This ensures workloads are managed according to their runtime requirements.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "31",
+      "key": "swdd~agent-create-control-interface-pipes-per-workload~2",
+      "fields": {
+        "summary": "Agent creates control interface pipes",
+        "issuetype": {
+          "id": "31",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall create input/output FIFO pipes for each workload that requires control interface access. This enables bidirectional communication between workloads and the Ankaios system.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "32",
+      "key": "swdd~agent-handles-workloads-with-fulfilled-dependencies~1",
+      "fields": {
+        "summary": "Agent handles workload dependencies",
+        "issuetype": {
+          "id": "32",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall respect inter-workload dependencies, starting workloads only when their dependencies are fulfilled. This ensures proper startup ordering and dependency management.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "33",
+      "key": "swdd~agent-supports-restart-policies~1",
+      "fields": {
+        "summary": "Agent supports restart policies",
+        "issuetype": {
+          "id": "33",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall implement ALWAYS, ON_FAILURE, and NEVER restart policies for automatic workload recovery. This provides configurable resilience for different workload types.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "34",
+      "key": "swdd~agent-workload-control-loop-exponential-backoff-retries~1",
+      "fields": {
+        "summary": "Agent uses exponential backoff",
+        "issuetype": {
+          "id": "34",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall use exponential backoff with jitter when retrying failed workload creation to prevent thundering herd. This ensures system stability during failure recovery.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "35",
+      "key": "swdd~agent-manager-stores-all-workload-states~1",
+      "fields": {
+        "summary": "Agent monitors workload states",
+        "issuetype": {
+          "id": "35",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall continuously monitor container states and report changes to the server for state synchronization. This ensures the server maintains an accurate view of workload states.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "36",
+      "key": "swdd~agent-initial-list-existing-workloads~1",
+      "fields": {
+        "summary": "Agent handles existing workloads",
+        "issuetype": {
+          "id": "36",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "On startup, the agent shall discover and adopt existing containers matching Ankaios labels for seamless restarts. This enables agent recovery without disrupting running workloads.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "37",
+      "key": "swdd~location-of-workload-files-at-predefined-path~1",
+      "fields": {
+        "summary": "Agent manages workload files",
+        "issuetype": {
+          "id": "37",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall create and mount workload-specific files at predefined locations based on manifest specifications. This enables configuration and data injection into containers.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "38",
+      "key": "swdd~agent-supports-pem-file-paths-as-cli-arguments~1",
+      "fields": {
+        "summary": "Agent supports mTLS",
+        "issuetype": {
+          "id": "38",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall support mutual TLS authentication using PEM certificates for secure server communication. This ensures encrypted and authenticated communication in production environments.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "39",
+      "key": "swdd~agent-supports-cli-argument-for-insecure-communication~1",
+      "fields": {
+        "summary": "Agent supports insecure mode",
+        "issuetype": {
+          "id": "39",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall allow insecure connections when explicitly configured via --insecure flag for testing scenarios. This simplifies development and testing workflows.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "40",
+      "key": "swdd~agent-reports-resource-availability~1",
+      "fields": {
+        "summary": "Agent reports resource availability",
+        "issuetype": {
+          "id": "40",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall monitor and report node resource usage (CPU, memory) to the server for scheduling decisions. This enables intelligent workload placement based on available resources.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "41",
+      "key": "swdd~agent-control-interface-authorization~1",
+      "fields": {
+        "summary": "Agent handles control interface authorization",
+        "issuetype": {
+          "id": "41",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall validate control interface requests against configured access rules before forwarding to server. This ensures workloads can only perform authorized operations.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "42",
+      "key": "swdd~agent-workload-lifecycle-management~1",
+      "fields": {
+        "summary": "Agent manages workload lifecycle",
+        "issuetype": {
+          "id": "42",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall handle the complete lifecycle of workloads including creation, updates, restarts, and deletion. This provides comprehensive workload management capabilities.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "43",
+      "key": "swdd~agent-validates-workload-specifications~1",
+      "fields": {
+        "summary": "Agent validates workload specifications",
+        "issuetype": {
+          "id": "43",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall validate workload configurations before execution to ensure runtime compatibility. This prevents invalid workload deployments and runtime errors.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "44",
+      "key": "swdd~agent-state-synchronization~1",
+      "fields": {
+        "summary": "Agent handles state synchronization",
+        "issuetype": {
+          "id": "44",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall maintain consistency between actual container states and reported states to the server. This ensures accurate state representation across the cluster.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "45",
+      "key": "swdd~agent-retry-mechanisms~1",
+      "fields": {
+        "summary": "Agent manages retry mechanisms",
+        "issuetype": {
+          "id": "45",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The agent shall implement intelligent retry logic with backoff for transient failures in workload operations. This improves reliability in unstable environments.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "46",
+      "key": "swdd~cli-loads-config-file~1",
+      "fields": {
+        "summary": "CLI loads config file",
+        "issuetype": {
+          "id": "46",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The CLI shall load configuration from files with support for environment variables and command-line overrides for connection settings. This provides flexible configuration for different environments.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "47",
+      "key": "swdd~cli-standalone-application~1",
+      "fields": {
+        "summary": "CLI is standalone application",
+        "issuetype": {
+          "id": "47",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The CLI shall operate as an independent binary that communicates with the Ankaios server without requiring local agent installation. This enables remote cluster management.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "48",
+      "key": "swdd~cli-supports-server-url-cli-argument~1",
+      "fields": {
+        "summary": "CLI supports server URL argument",
+        "issuetype": {
+          "id": "48",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The CLI shall accept server connection URL via --server-url argument to connect to remote Ankaios clusters. This enables management of multiple clusters from a single CLI.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "49",
+      "key": "swdd~cli-provides-get-desired-state~1",
+      "fields": {
+        "summary": "CLI provides get desired state",
+        "issuetype": {
+          "id": "49",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The CLI shall retrieve and display the current desired state from the server in YAML or JSON format. This enables state inspection and backup.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "50",
+      "key": "swdd~cli-provides-list-of-workloads~1",
+      "fields": {
+        "summary": "CLI provides list workloads",
+        "issuetype": {
+          "id": "50",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The CLI shall list all workloads with their current states, supporting filtering and sorting options for better visibility. This provides quick cluster status overview.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "51",
+      "key": "swdd~cli-provides-set-desired-state~1",
+      "fields": {
+        "summary": "CLI provides set desired state",
+        "issuetype": {
+          "id": "51",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The CLI shall update the cluster's desired state by sending new configurations to the server with validation. This enables declarative cluster management.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "52",
+      "key": "swdd~cli-provides-delete-workload~1",
+      "fields": {
+        "summary": "CLI provides delete workloads",
+        "issuetype": {
+          "id": "52",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The CLI shall delete specific workloads by name, with support for batch deletion and confirmation prompts. This enables selective workload removal.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "53",
+      "key": "swdd~cli-provides-run-workload~1",
+      "fields": {
+        "summary": "CLI provides run workload",
+        "issuetype": {
+          "id": "53",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The CLI shall support quick workload deployment with minimal configuration using the run command. This enables rapid testing and development workflows.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "54",
+      "key": "swdd~cli-apply-supports-ankaios-manifest~1",
+      "fields": {
+        "summary": "CLI supports Ankaios manifests",
+        "issuetype": {
+          "id": "54",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The CLI shall parse and apply Ankaios manifest files containing workload specifications and configurations. This enables GitOps-style deployments.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "55",
+      "key": "swdd~cli-provides-workload-logs~1",
+      "fields": {
+        "summary": "CLI provides workload logs",
+        "issuetype": {
+          "id": "55",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The CLI shall stream real-time logs from running workloads with support for filtering and following output. This enables debugging and monitoring of workload behavior.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "56",
+      "key": "swdd~cli-provides-list-of-agents~1",
+      "fields": {
+        "summary": "CLI provides list of agents",
+        "issuetype": {
+          "id": "56",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The CLI shall display all connected agents with their status, resources, and workload assignments. This provides visibility into cluster infrastructure.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "57",
+      "key": "swdd~cli-provides-list-of-configs~1",
+      "fields": {
+        "summary": "CLI provides list of configs",
+        "issuetype": {
+          "id": "57",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The CLI shall list all configuration items defined in the state with their keys and values. This enables configuration management and debugging.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "58",
+      "key": "swdd~cli-shall-support-desired-state-yaml-json~1",
+      "fields": {
+        "summary": "CLI supports YAML/JSON output",
+        "issuetype": {
+          "id": "58",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The CLI shall output data in both YAML and JSON formats based on user preference for integration flexibility. This enables integration with various tools and scripts.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "59",
+      "key": "swdd~cli-shell-completion~1",
+      "fields": {
+        "summary": "CLI provides shell completion",
+        "issuetype": {
+          "id": "59",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The CLI shall provide shell completion scripts for bash, zsh, and fish to improve user experience. This enables faster command entry and discovery.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "60",
+      "key": "swdd~cli-get-workloads-with-watch~1",
+      "fields": {
+        "summary": "CLI supports watch mode",
+        "issuetype": {
+          "id": "60",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The CLI shall continuously monitor and display workload state changes in real-time using the --watch flag. This enables live monitoring of cluster state.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "61",
+      "key": "swdd~cli-supports-pem-file-paths-as-cli-arguments~1",
+      "fields": {
+        "summary": "CLI supports mTLS",
+        "issuetype": {
+          "id": "61",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The CLI shall support mutual TLS authentication using PEM certificates for secure server connections. This ensures secure remote cluster management.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "62",
+      "key": "swdd~cli-supports-cli-argument-for-insecure-communication~1",
+      "fields": {
+        "summary": "CLI supports insecure mode",
+        "issuetype": {
+          "id": "62",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The CLI shall allow insecure connections via --insecure flag for development and testing environments. This simplifies development workflows.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "63",
+      "key": "swdd~cli-connection-error-handling~1",
+      "fields": {
+        "summary": "CLI handles connection errors",
+        "issuetype": {
+          "id": "63",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The CLI shall provide clear error messages for connection failures and never retry CLI connections automatically. This provides immediate feedback for troubleshooting.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "64",
+      "key": "swdd~cli-provides-object-field-mask-arg-to-get-partial-desired-state~1",
+      "fields": {
+        "summary": "CLI supports field masks",
+        "issuetype": {
+          "id": "64",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The CLI shall support field masks to retrieve only specific parts of the state for reduced data transfer. This improves performance for large clusters.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "65",
+      "key": "swdd~cli-table-provides-default-table-output~2",
+      "fields": {
+        "summary": "CLI provides table output",
+        "issuetype": {
+          "id": "65",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The CLI shall format output as tables with proper column alignment and optional wrapping/truncation. This provides readable output for human consumption.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "66",
+      "key": "swdd~cli-apply-manifest-check-for-api-version-compatibility~1",
+      "fields": {
+        "summary": "CLI supports manifest validation",
+        "issuetype": {
+          "id": "66",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The CLI shall validate manifest syntax and API version compatibility before applying changes. This prevents deployment of incompatible configurations.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "67",
+      "key": "swdd~cli-provides-termination-signal-handling~1",
+      "fields": {
+        "summary": "CLI handles termination signals",
+        "issuetype": {
+          "id": "67",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The CLI shall gracefully handle SIGINT/SIGTERM signals and cleanup resources like log streams. This ensures clean shutdown and resource cleanup.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "68",
+      "key": "swdd~from-server-channel~1",
+      "fields": {
+        "summary": "Common provides FromServerChannel",
+        "issuetype": {
+          "id": "68",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The common library shall provide async channels for server-to-client communication with proper message typing. This enables type-safe asynchronous communication.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "69",
+      "key": "swdd~to-server-channel~1",
+      "fields": {
+        "summary": "Common provides ToServerChannel",
+        "issuetype": {
+          "id": "69",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The common library shall provide async channels for client-to-server communication with request/response handling. This enables bidirectional communication patterns.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "70",
+      "key": "swdd~common-object-representation~1",
+      "fields": {
+        "summary": "Common provides object representation",
+        "issuetype": {
+          "id": "70",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The common library shall define data structures for workloads, agents, states, and configurations used across components. This ensures consistent data models throughout the system.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "71",
+      "key": "swdd~common-workload-states-supported-states~1",
+      "fields": {
+        "summary": "Common defines workload states",
+        "issuetype": {
+          "id": "71",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The common library shall define all valid workload execution states (pending, running, succeeded, failed, etc.) and their meanings. This provides a consistent state model for workload lifecycle.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "72",
+      "key": "swdd~common-workload-state-transitions~1",
+      "fields": {
+        "summary": "Common manages state transitions",
+        "issuetype": {
+          "id": "72",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The common library shall enforce valid state transitions and provide state machine logic for workload lifecycle. This ensures consistent state management across components.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "73",
+      "key": "swdd~common-object-serialization~1",
+      "fields": {
+        "summary": "Common provides deterministic serialization",
+        "issuetype": {
+          "id": "73",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The common library shall ensure consistent serialization of objects for reliable state comparison and storage. This enables accurate change detection and state persistence.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "74",
+      "key": "swdd~common-naming-conventions~1",
+      "fields": {
+        "summary": "Common defines naming conventions",
+        "issuetype": {
+          "id": "74",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The common library shall enforce naming rules for workloads, agents, and config items using regex validation. This ensures consistent and valid naming across the system.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "75",
+      "key": "swdd~common-version-checking~1",
+      "fields": {
+        "summary": "Common provides version checking",
+        "issuetype": {
+          "id": "75",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The common library shall validate API version compatibility between components to prevent protocol mismatches. This ensures components can communicate correctly.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "76",
+      "key": "swdd~workload-dependencies~1",
+      "fields": {
+        "summary": "Common manages dependencies",
+        "issuetype": {
+          "id": "76",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The common library shall define and validate inter-workload dependency conditions for startup and shutdown ordering. This enables complex application deployments with dependencies.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "77",
+      "key": "swdd~common-conversions-between-ankaios-and-proto~1",
+      "fields": {
+        "summary": "Common provides conversions",
+        "issuetype": {
+          "id": "77",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The common library shall handle conversions between internal Ankaios objects and protobuf messages for gRPC communication. This enables protocol-agnostic internal implementation.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "78",
+      "key": "swdd~common-interface-definitions~1",
+      "fields": {
+        "summary": "Common provides interface definitions",
+        "issuetype": {
+          "id": "78",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The common library shall define traits and interfaces used across components for consistency. This ensures uniform component interactions.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "79",
+      "key": "swdd~agent-map-manages-agent-names-with-agent-attributes~2",
+      "fields": {
+        "summary": "Common manages agent map",
+        "issuetype": {
+          "id": "79",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The common library shall provide data structures to track agent names, attributes, and connection status. This enables centralized agent management.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "80",
+      "key": "swdd~grpc-delegate-workflow-to-external-library~1",
+      "fields": {
+        "summary": "gRPC delegates to tonic library",
+        "issuetype": {
+          "id": "80",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The gRPC layer shall use the tonic library for protocol implementation and service generation. This leverages mature gRPC implementation for reliability.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "81",
+      "key": "swdd~grpc-server-creates-agent-connection~1",
+      "fields": {
+        "summary": "gRPC server creates agent connections",
+        "issuetype": {
+          "id": "81",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The gRPC server shall accept and manage persistent bidirectional streams with agents for real-time communication. This enables continuous state synchronization.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "82",
+      "key": "swdd~grpc-server-creates-cli-connection~1",
+      "fields": {
+        "summary": "gRPC server creates CLI connections",
+        "issuetype": {
+          "id": "82",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The gRPC server shall handle short-lived request/response connections from CLI clients. This enables command-based cluster management.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "83",
+      "key": "swdd~grpc-client-retries-connection~2",
+      "fields": {
+        "summary": "gRPC client retries agent connections",
+        "issuetype": {
+          "id": "83",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "Agent connections shall automatically retry with exponential backoff when disconnected from the server. This ensures resilient agent connectivity.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "84",
+      "key": "swdd~grpc-client-never-retries-cli-connection~1",
+      "fields": {
+        "summary": "gRPC client never retries CLI connections",
+        "issuetype": {
+          "id": "84",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "CLI connections shall fail immediately without retry to provide quick feedback to users. This ensures responsive CLI behavior.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "85",
+      "key": "swdd~grpc-supports-pem-file-format-for-X509-certificates~1",
+      "fields": {
+        "summary": "gRPC supports PEM certificates",
+        "issuetype": {
+          "id": "85",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The gRPC layer shall load and validate X.509 certificates in PEM format for TLS authentication. This supports standard certificate formats.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "86",
+      "key": "swdd~grpc-checks-given-PEM-file-for-proper-unix-file-permission~1",
+      "fields": {
+        "summary": "gRPC checks file permissions",
+        "issuetype": {
+          "id": "86",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The gRPC layer shall verify that PEM files have appropriate Unix permissions (0400/0600) for security. This prevents unauthorized access to sensitive keys.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "87",
+      "key": "swdd~grpc-mtls-activation~1",
+      "fields": {
+        "summary": "gRPC activates mTLS conditionally",
+        "issuetype": {
+          "id": "87",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The gRPC layer shall enable mutual TLS when certificates are provided, otherwise use insecure connections. This provides flexible security configuration.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "88",
+      "key": "swdd~grpc-server-forwards-from-server-messages-to-grpc-client~1",
+      "fields": {
+        "summary": "gRPC forwards messages efficiently",
+        "issuetype": {
+          "id": "88",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The gRPC server shall distribute messages to multiple clients in a single operation for performance. This optimizes message distribution overhead.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "89",
+      "key": "swdd~grpc-disconnection-handling~1",
+      "fields": {
+        "summary": "gRPC handles disconnections",
+        "issuetype": {
+          "id": "89",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The gRPC layer shall detect disconnections and notify the appropriate components for state cleanup. This ensures proper connection lifecycle management.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "90",
+      "key": "swdd~grpc-version-compatibility~1",
+      "fields": {
+        "summary": "gRPC checks version compatibility",
+        "issuetype": {
+          "id": "90",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The gRPC layer shall validate protocol version compatibility and reject incompatible connections. This prevents protocol mismatches between components.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "91",
+      "key": "swdd~podman-implements-runtime-connector~1",
+      "fields": {
+        "summary": "Podman runtime connector",
+        "issuetype": {
+          "id": "91",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The Podman connector shall implement full container lifecycle management using podman CLI commands. This provides rootless container support with Docker compatibility.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "92",
+      "key": "swdd~podman-uses-labels~1",
+      "fields": {
+        "summary": "Podman uses labels",
+        "issuetype": {
+          "id": "92",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The Podman connector shall use container labels to track Ankaios workload ownership and metadata. This enables workload identification and recovery.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "93",
+      "key": "swdd~containerd-implements-runtime-connector~1",
+      "fields": {
+        "summary": "Containerd runtime connector",
+        "issuetype": {
+          "id": "93",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The containerd connector shall manage containers using nerdctl CLI with full feature parity. This enables integration with containerd-based platforms.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "94",
+      "key": "swdd~containerd-state-management~1",
+      "fields": {
+        "summary": "Containerd state management",
+        "issuetype": {
+          "id": "94",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The containerd connector shall map container states to Ankaios workload states accurately. This ensures consistent state representation across runtimes.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "95",
+      "key": "swdd~podman-kube-implements-runtime-connector~1",
+      "fields": {
+        "summary": "Podman-kube runtime connector",
+        "issuetype": {
+          "id": "95",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The podman-kube connector shall apply Kubernetes manifests using podman play kube for pod management. This enables Kubernetes-style deployments.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "96",
+      "key": "swdd~runtime-state-monitoring~1",
+      "fields": {
+        "summary": "Runtime state monitoring",
+        "issuetype": {
+          "id": "96",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "All runtime connectors shall implement state polling to detect container state changes. This ensures timely state updates for all workloads.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "97",
+      "key": "swdd~runtime-workload-identification~1",
+      "fields": {
+        "summary": "Runtime workload identification",
+        "issuetype": {
+          "id": "97",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "Runtime connectors shall use unique identifiers (labels/volumes) to track workload instances. This enables workload recovery and identification.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "98",
+      "key": "swdd~runtime-error-handling~1",
+      "fields": {
+        "summary": "Runtime error handling",
+        "issuetype": {
+          "id": "98",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "Runtime connectors shall handle and report runtime-specific errors with appropriate recovery strategies. This ensures robust error handling across different runtimes.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "99",
+      "key": "swdd~agent-control-interface-creates-two-pipes-per-workload~1",
+      "fields": {
+        "summary": "Control interface FIFO creation",
+        "issuetype": {
+          "id": "99",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The control interface shall create named pipes (FIFOs) for bidirectional workload communication. Each workload gets dedicated input and output pipes for secure inter-process communication.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "100",
+      "key": "swdd~agent-control-interface-pipes-path-naming~2",
+      "fields": {
+        "summary": "Control interface path convention",
+        "issuetype": {
           "id": "100",
           "description": "Software design requirement",
           "name": "Requirement"
@@ -130,7 +2600,85 @@
           "displayName": "System",
           "accountId": "system"
         },
-        "description": "The Ankaios Server provides an UpdateState interface.",
+        "description": "Control interface pipes shall be created at /run/ankaios/control_interface/<workload_name>/ with standardized naming. The path structure ensures proper isolation and predictable locations.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "101",
+      "key": "swdd~agent-control-interface-authorization~1",
+      "fields": {
+        "summary": "Control interface authorization",
+        "issuetype": {
+          "id": "101",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The control interface shall enforce access control rules before forwarding requests to the server. Authorization ensures workloads can only perform configured operations.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "102",
+      "key": "swdd~ank-base-provides-object-definitions~1",
+      "fields": {
+        "summary": "API object definitions",
+        "issuetype": {
+          "id": "102",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The API shall provide protobuf definitions for all Ankaios objects ensuring cross-language compatibility. This enables client libraries in multiple programming languages.",
+        "verifiableByCodeOnly": true
+      }
+    },
+    {
+      "id": "103",
+      "key": "swdd~api-versioning~1",
+      "fields": {
+        "summary": "API versioning",
+        "issuetype": {
+          "id": "103",
+          "description": "Software design requirement",
+          "name": "Requirement"
+        },
+        "status": {
+          "id": "approved",
+          "name": "Approved"
+        },
+        "assignee": {
+          "displayName": "Unassigned",
+          "accountId": "unassigned"
+        },
+        "reporter": {
+          "displayName": "System",
+          "accountId": "system"
+        },
+        "description": "The API shall include version information in all messages to support backward compatibility. This enables gradual API evolution without breaking existing clients.",
         "verifiableByCodeOnly": true
       }
     }
