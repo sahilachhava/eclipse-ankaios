@@ -1,0 +1,106 @@
+================================================================================
+                    REQUIREMENTS EXTRACTION COMPLETE
+================================================================================
+
+SOURCE:
+  HTML File: /Users/sahil/Desktop/eclipse/req_tracing_report.html
+  Size: 1.9MB
+
+OUTPUT:
+  JSON File: /Users/sahil/Desktop/eclipse/eclipse-ankaios/old_requirements/code-requirements.json
+  Size: 312KB
+  Lines: 10,251
+
+EXTRACTION SUMMARY:
+  ✓ Total Requirements Extracted: 394
+  ✓ All requirements uniquely identified
+  ✓ All requirements categorized by component
+  ✓ Sequential numbering: 001-394 (global sequence)
+  ✓ All required fields populated
+  ✓ JSON structure validated
+
+COMPONENT BREAKDOWN:
+  ┌─────────────────┬──────────────┐
+  │ Component       │ Count        │
+  ├─────────────────┼──────────────┤
+  │ Agent           │ 188 (47.7%)  │
+  │ AnkBase (CLI)   │  69 (17.5%)  │
+  │ Server          │  66 (16.8%)  │
+  │ gRPC            │  42 (10.7%)  │
+  │ Common          │  27 ( 6.9%)  │
+  │ API             │   2 ( 0.5%)  │
+  └─────────────────┴──────────────┘
+
+JSON STRUCTURE:
+  {
+    "expand": "schema,names",
+    "startAt": 0,
+    "maxResults": 394,
+    "total": 394,
+    "issues": [
+      {
+        "id": "1",
+        "key": "REQ-C-<Component>-001",
+        "fields": {
+          "summary": "<Readable requirement title>",
+          "issuetype": {
+            "id": "1",
+            "description": "Code implementation requirement",
+            "name": "Code Requirement"
+          },
+          "status": {
+            "id": "approved",
+            "name": "Approved"
+          },
+          "assignee": {...},
+          "reporter": {...},
+          "description": "<1-2 sentence description>",
+          "verifiableByCodeOnly": true
+        }
+      },
+      ...
+    ]
+  }
+
+KEY FEATURES:
+  ✓ Requirements extracted from HTML impl~ tags
+  ✓ Component categorization based on origin file path
+  ✓ Readable titles generated from requirement names
+  ✓ Contextual descriptions based on requirement patterns
+  ✓ Sequential ID numbering (not reset per component)
+  ✓ All requirements marked as "Approved" status
+  ✓ All requirements marked as verifiable by code only
+
+CATEGORIZATION LOGIC:
+  ./agent/     → Agent
+  ./grpc/      → gRPC
+  ./common/    → Common
+  ./server/    → Server
+  ./cli/       → AnkBase (CLI)
+  ./tools/ank  → AnkBase (CLI)
+  ./api/       → API
+
+SAMPLE REQUIREMENTS:
+  
+  REQ-C-Agent-001: Agent Add On Update Missing Workload
+    "Implementation requirement for Agent component: Agent Add On Update 
+     Missing Workload. This requirement relates to workload management 
+     and operations."
+
+  REQ-C-gRPC-003: Agent Adds Workload Prefix Id Control Interface Request
+    "Implementation requirement for gRPC component: Agent Adds Workload 
+     Prefix Id Control Interface Request. This requirement relates to 
+     workload management and operations."
+
+  REQ-C-Server-048: Agent From Agent Field
+    "Implementation requirement for Server component: Agent From Agent Field."
+
+================================================================================
+                              ✓ SUCCESS
+================================================================================
+
+The complete code-requirements.json file has been generated with all 394
+implementation requirements properly categorized and formatted.
+
+File Location:
+  /Users/sahil/Desktop/eclipse/eclipse-ankaios/old_requirements/code-requirements.json
